@@ -1,0 +1,39 @@
+create database kailua;
+use kailua;
+
+
+CREATE TABLE car (
+    car_tier ENUM('luxury', 'family', 'sport'),
+    brand VARCHAR(255),
+    model VARCHAR(255),
+    fuel_type VARCHAR(255),
+    license_plate varchar(255) PRIMARY KEY,
+    registration_date DATE,
+    total_kilometers INT
+);
+
+
+
+create table lejer(
+navn varchar(50),
+adresse varchar(50),
+postnummer int,
+city varchar(50),
+coutry_code int,
+telefon_nummer int,
+email varchar(50),
+kørekortnummer int primary key,
+kørekortsudstedelsesdato DATE
+);
+
+
+create table lejekontrakt(
+lejer_id int primary key auto_increment,
+kørekortnummer int,
+fra_date datetime,
+til_date datetime,
+max_km int,
+license_plate varchar(255),
+foreign key (license_plate) references car(license_plate),
+foreign key (kørekortnummer) references lejer(kørekortnummer)
+);
