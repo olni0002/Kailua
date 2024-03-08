@@ -16,7 +16,7 @@ public class TestConnector {
         System.out.print("password: ");
         password = console.nextLine();
 
-        System.out.println("Which table do you want to configure (0 to exit program?");
+        System.out.println("Which table do you want to configure (0 to exit program)?");
         String table = console.nextLine();
 
         while (!(table.equals("0"))) {
@@ -49,7 +49,7 @@ public class TestConnector {
                     break;
             }
 
-            System.out.println("Which table do you want to configure (0 to exit program?");
+            System.out.println("Which table do you want to configure (0 to exit program)?");
             table = console.nextLine();
 
         }
@@ -390,7 +390,7 @@ public class TestConnector {
                 System.out.print(", ");
                 System.out.print(kørekortnummer);
                 System.out.print(", ");
-                System.out.print(kørekorsdato + "]");
+                System.out.println(kørekorsdato + "]");
            }
 
            connection.close();
@@ -428,7 +428,7 @@ public class TestConnector {
                 System.out.print(", ");
                 System.out.print(registrationDate);
                 System.out.print(", ");
-                System.out.print(totalKilometers + "]");
+                System.out.println(totalKilometers + "]");
            }
 
            connection.close();
@@ -463,7 +463,7 @@ public class TestConnector {
                 System.out.print(", ");
                 System.out.print(maxKm);
                 System.out.print(", ");
-                System.out.print(licensePlate + "]");
+                System.out.println(licensePlate + "]");
            }
 
            connection.close();
