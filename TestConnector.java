@@ -9,58 +9,11 @@ public class TestConnector {
     static String password;
     static Scanner console = new Scanner(System.in);
 
-    public static void main(String[] args) {
-
-        System.out.print("username: ");
-        username = console.nextLine();
-        System.out.print("password: ");
-        password = console.nextLine();
-
-        System.out.println("Which table do you want to configure (0 to exit program)?");
-        String table = console.nextLine();
-
-        while (!(table.equals("0"))) {
-            System.out.println("Your options are:");
-            System.out.println();
-            System.out.println("    0) Exit program");
-            System.out.println("    1) Insert data into the table");
-            System.out.println("    2) Show data in the table");
-            System.out.println("    3) Update data in the table");
-            System.out.println("    4) Delete data in the table");
-
-            System.out.print("Choose option [1-4]: ");
-            String option = console.nextLine();
-
-            switch (option) {
-                case "1":
-                    insertInto(table);
-                    executeQuery();
-                    break;
-                case "2":
-                    select(table);
-                    break;
-                case "3":
-                    update(table);
-                    executeQuery();
-                    break;
-                case "4":
-                    delete(table);
-                    executeQuery();
-                    break;
-            }
-
-            System.out.println("Which table do you want to configure (0 to exit program)?");
-            table = console.nextLine();
-
-        }
-
-    }
-
     public static void addInputToQuery() {
         query += "'" + console.nextLine() + "', ";
     }
 
-    private static void insertInto(String table) {
+    public static void insertInto(String table) {
         query = "INSERT INTO " + table + " VALUES (";
 
         System.out.println("Please input your values for:");
@@ -161,7 +114,7 @@ public class TestConnector {
         query = query.substring(0, query.length() - 2) + ");";
     }
     
-    private static void update(String table) {
+    public static void update(String table) {
         query = "UPDATE " + table;
 
         switch (table) {
@@ -312,7 +265,7 @@ public class TestConnector {
         query += "WHERE lejer_id = " + id + ";";
     }
 
-    private static void delete(String table) {
+    public static void delete(String table) {
         query = "DELETE FROM " + table + " WHERE ";
         
         switch (table) {
@@ -332,7 +285,7 @@ public class TestConnector {
         
     }
 
-    public static void executeQuery() {
+    public static void executeQuery(String username, String password) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(database, username, password);
@@ -345,7 +298,7 @@ public class TestConnector {
         }
     }
 
-    private static void select(String table) {
+    public static void select(String table) {
         query = "SELECT * FROM " + table + ";";
 
         switch (table) {
