@@ -8,9 +8,9 @@ import java.util.Scanner;
 
 
 public class MySqlConnection {
-    private String database = "jdbc:mysql://localhost:3306/biludlejning";
-    private String username = "bruger1";
-    private String password = "123";
+    private String database = "jdbc:mysql://localhost:3306/kailua";
+    private String username = "root";
+    private String password = "zxj98xvy";
     private Connection connection = null;
 
 
@@ -247,15 +247,15 @@ public class MySqlConnection {
 
             int parameterIndex = 0;
             switch (kategori) {
-                case "Rigistreingsnummer":
+                case "licensePlate":
                     parameterIndex = 1;
                     break;
                 case "kørekortnummer":
-                case "max_km":
+                case "maxKm":
                     parameterIndex = 2;
                     break;
-                case "til_date":
-                case "fra_date":
+                case "tilDate":
+                case "fraDate":
                     parameterIndex = 3;
                     break;
                 default:
@@ -286,13 +286,11 @@ public class MySqlConnection {
         }
     }
 
-    public ArrayList<Lejekontrakt> ShowAllLejekontrakt() {
 
+    public ArrayList<Lejekontrakt> ShowAllLejekontrakt() {
         ArrayList<Lejekontrakt> lejekontrakts = new ArrayList<>();
         String query = "SELECT * FROM Lejekontrakt;";
-        Statement stmt = null;
-        try {
-            stmt = connection.createStatement();
+        try (Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
@@ -301,13 +299,11 @@ public class MySqlConnection {
                 LocalDateTime fraDate = rs.getTimestamp("fra_date").toLocalDateTime();
                 LocalDateTime tilDate = rs.getTimestamp("til_date").toLocalDateTime();
                 int maxKm = rs.getInt("max_km");
-                String rigistreingsnummer = rs.getString("Rigistreingsnummer");
+                String rigistreingsnummer = rs.getString("license_plate");
 
-                Lejekontrakt adding = new Lejekontrakt(lejerId,kørekortnummer,fraDate,tilDate,maxKm,rigistreingsnummer);
+                Lejekontrakt adding = new Lejekontrakt(lejerId, kørekortnummer, fraDate, tilDate, maxKm, rigistreingsnummer);
                 lejekontrakts.add(adding);
             }
-
-
         } catch (SQLException e) {
             System.out.println("EXCEPTION: " + e.getMessage());
         }
@@ -321,7 +317,6 @@ public class MySqlConnection {
     }
 
 }
-
 
 
 
