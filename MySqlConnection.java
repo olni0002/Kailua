@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class MySqlConnection {
     private String database = "jdbc:mysql://localhost:3306/kailua";
-    private String username = "root";
-    private String password = "zxj98xvy";
+    private String username = 
+    private String password = 
     private Connection connection = null;
 
 
